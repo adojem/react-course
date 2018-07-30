@@ -9,7 +9,6 @@ class Navbar extends Component {
 
    static propTypes = {
       onNewRecipe: PropTypes.func.isRequired,
-      closeNewRecipe: PropTypes.func.isRequired
    };
 
    render() {
