@@ -1,0 +1,14 @@
+{
+   "globals": {
+      "fetch": false
+   },
+   "rules": {
+      "react/jsx-indent": ["error", 3],
+      "react/jsx-indent-props": ["error", 3]
+   },
+   "extends": [
+      "airbnb",
+      "plugin:prettier/recommended",
+      "plugin:react/recommended"
+   ]
+}
