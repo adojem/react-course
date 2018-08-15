@@ -1,7 +1,9 @@
 {
    "globals": {
+      "document": true,
       "fetch": false
    },
+   "parser": "babel-eslint",
    "rules": {
       "react/jsx-indent": ["error", 3],
       "react/jsx-indent-props": ["error", 3],

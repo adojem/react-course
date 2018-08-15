@@ -2,27 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class TodoForm extends Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         inputValue: 'lolhahaha'
-      };
+   state = {
+      inputValue: ''
+   };
 
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-   }
-
-   handleSubmit() {
+   handleSubmit = () => {
       const { addTodo } = this.props;
       const { inputValue } = this.state;
       addTodo(inputValue);
-   }
+   };
 
-   handleChange(e) {
+   handleChange = (e) => {
       this.setState({
          inputValue: e.target.value
       });
-   }
+   };
 
    render() {
       const { inputValue } = this.state;
