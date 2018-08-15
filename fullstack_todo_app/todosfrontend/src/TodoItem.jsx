@@ -18,7 +18,8 @@ const TodoItem = ({ name, completed, onDelete, onToggle }) => (
 TodoItem.propTypes = {
    name: PropTypes.string.isRequired,
    completed: PropTypes.bool.isRequired,
-   onDelete: PropTypes.func.isRequired
+   onDelete: PropTypes.func.isRequired,
+   onToggle: PropTypes.func.isRequired
 };
 
 export default TodoItem;
