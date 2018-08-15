@@ -4,7 +4,8 @@
    },
    "rules": {
       "react/jsx-indent": ["error", 3],
-      "react/jsx-indent-props": ["error", 3]
+      "react/jsx-indent-props": ["error", 3],
+      "no-underscore-dangle": [0]
    },
    "extends": [
       "airbnb",
