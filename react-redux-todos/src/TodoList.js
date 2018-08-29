@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Todo from './Todo';
 import NewTodoForm from './NewTodo';
 import { connect } from 'react-redux';
-import { addTodo, removeTodo } from './actionCreator';
+import { addTodo, removeTodo, getTodos } from './actionCreator';
 import { Route } from 'react-router-dom';
 
 class TodoList extends Component {
@@ -10,6 +10,10 @@ class TodoList extends Component {
       super(props);
       this.handleAdd = this.handleAdd.bind(this);
       this.removeTodo = this.removeTodo.bind(this);
+   }
+
+   componentDidMount() {
+      this.props.getTodos();
    }
 
    handleAdd(val) {
@@ -21,19 +25,22 @@ class TodoList extends Component {
    }
 
    render() {
-      let todos = this.props.todos.map((val, index) => (
+      let todos = this.props.todos.map((val) => (
          <Todo
-            removeTodo={this.removeTodo.bind(this, val.id)}
+            removeTodo={this.removeTodo.bind(this, val._id)}
             task={val.task}
-            key={index}
+            key={val._id}
          />
       ));
 
       return (
          <div>
-            <Route path="/todos/new" component={props => (
-               <NewTodoForm {...props} handleSubmit={this.handleAdd} />
-            )} />
+            <Route
+               path="/todos/new"
+               component={(props) => (
+                  <NewTodoForm {...props} handleSubmit={this.handleAdd} />
+               )}
+            />
             <Route exact path="/todos" component={() => <div>{todos}</div>} />
          </div>
       );
@@ -48,5 +55,5 @@ function mapStateToProp(reduxState) {
 
 export default connect(
    mapStateToProp,
-   { addTodo, removeTodo }
+   { addTodo, removeTodo, getTodos }
 )(TodoList);
