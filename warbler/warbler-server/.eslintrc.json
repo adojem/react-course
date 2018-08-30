@@ -1,0 +1,9 @@
+{
+   "rules": {
+      "no-underscore-dangle": [0]
+   },
+   "extends": [
+      "airbnb-base",
+      "plugin:prettier/recommended"
+   ]
+}
