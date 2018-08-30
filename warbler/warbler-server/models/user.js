@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-   emial: {
+   email: {
       type: String,
       required: true,
       unique: true
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
    }
 });
 
-userSchema.pre('save', async (next) => {
+userSchema.pre('save', async function checkPass(next) {
    try {
       if (!this.isModified('password')) {
          return next();
