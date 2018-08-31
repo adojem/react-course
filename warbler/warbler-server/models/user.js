@@ -7,21 +7,24 @@ const userSchema = new mongoose.Schema({
       required: true,
       unique: true,
    },
-
    username: {
       type: String,
       required: true,
       unique: true,
    },
-
    password: {
       type: String,
       required: true,
    },
-
    profileImageUrl: {
       stype: String,
    },
+   messages: [
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: 'Message',
+      },
+   ],
 });
 
 userSchema.pre('save', async function(next) {

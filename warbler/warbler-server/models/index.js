@@ -6,8 +6,9 @@ mongoose.connect(
    'mongodb://localhost/warbler',
    {
       useNewUrlParser: true,
-      keepAlive: true
+      keepAlive: true,
    }
 );
 
 module.exports.User = require('./user');
+module.exports.Message = require('./message');
