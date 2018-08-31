@@ -1,7 +1,41 @@
 const jwt = require('jsonwebtoken');
 const db = require('../models');
 
-exports.signin = () => {};
+exports.signin = async (req, res, next) => {
+   try {
+      const user = await db.User.findOne({
+         email: req.body.email,
+      });
+      const { id, username, profileImageUrl } = user;
+      const isMatch = await user.comparePassword(req.body.password);
+      if (isMatch) {
+         const token = jwt.sign(
+            {
+               id,
+               username,
+               profileImageUrl,
+            },
+            process.env.SECRET_KEY
+         );
+
+         return res.status(200).json({
+            id,
+            username,
+            profileImageUrl,
+            token,
+         });
+      }
+      return next({
+         status: 400,
+         message: 'Invalid Email/Password.',
+      });
+   } catch (e) {
+      return next({
+         status: 400,
+         message: 'Invalid Email/Password.',
+      });
+   }
+};
 
 exports.signup = async (req, res, next) => {
    try {
@@ -11,7 +45,7 @@ exports.signup = async (req, res, next) => {
          {
             id,
             username,
-            profileImageUrl
+            profileImageUrl,
          },
          process.env.SECRET_KEY
       );
@@ -19,7 +53,7 @@ exports.signup = async (req, res, next) => {
          id,
          username,
          profileImageUrl,
-         token
+         token,
       });
    } catch (err) {
       // if a validation fails!
@@ -28,7 +62,7 @@ exports.signup = async (req, res, next) => {
       }
       return next({
          status: 400,
-         message: err.message
+         message: err.message,
       });
    }
 };

@@ -5,26 +5,26 @@ const userSchema = new mongoose.Schema({
    email: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
    },
 
    username: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
    },
 
    password: {
       type: String,
-      required: true
+      required: true,
    },
 
    profileImageUrl: {
-      stype: String
-   }
+      stype: String,
+   },
 });
 
-userSchema.pre('save', async function checkPass(next) {
+userSchema.pre('save', async function(next) {
    try {
       if (!this.isModified('password')) {
          return next();
@@ -37,7 +37,7 @@ userSchema.pre('save', async function checkPass(next) {
    }
 });
 
-userSchema.method.comparePassword = async (candidatePassword, next) => {
+userSchema.methods.comparePassword = async function(candidatePassword, next) {
    try {
       const isMatch = await bcrypt.compare(candidatePassword, this.password);
       return isMatch;
