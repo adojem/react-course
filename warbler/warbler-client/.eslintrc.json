@@ -7,7 +7,7 @@
       "react/jsx-indent": ["error", 3],
       "react/jsx-indent-props": ["error", 3],
       "react/jsx-filename-extension": "off",
-      "implicit-arrow-linebreak": "off"
+      "implicit-arrow-linebreak": ["off"]
    },
    "extends": [
       "airbnb"
