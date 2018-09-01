@@ -4,11 +4,24 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Homepage from '../components/Homepage';
+import AuthForm from '../components/AuthForm';
 
-const Main = props => (
+const Main = () => (
    <div className="container">
       <Switch>
          <Route exact path="/" render={props => <Homepage {...props} />} />
+         <Route
+            exact
+            path="/signin"
+            render={props => <AuthForm buttonText="Log in" heading="Welcome Back." {...props} />}
+         />
+         <Route
+            exact
+            path="/signup"
+            render={props => (
+               <AuthForm buttonText="Log in" heading="Join Warbler today" {...props} />
+            )}
+         />
       </Switch>
    </div>
 );
