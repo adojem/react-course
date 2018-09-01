@@ -19,7 +19,7 @@ const Main = () => (
             exact
             path="/signup"
             render={props => (
-               <AuthForm buttonText="Log in" heading="Join Warbler today" {...props} />
+               <AuthForm signUp buttonText="Sign me up!" heading="Join Warbler today" {...props} />
             )}
          />
       </Switch>
