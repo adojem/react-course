@@ -1,11 +1,13 @@
 {
    "env": {
-      "browser": true,
-      "node": true
+      "browser": true
    },
    "rules": {
       "indent": ["error", 3, { "SwitchCase": 1}],
-      "no-underscore-dangle": "off"
+      "react/jsx-indent": ["error", 3],
+      "no-underscore-dangle": "off",
+      "react/jsx-filename-extension": "off",
+      "implicit-arrow-linebreak": "off"
    },
    "extends": [
       "airbnb"
