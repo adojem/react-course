@@ -7,6 +7,11 @@ export const setCurrentUser = user => ({
    user,
 });
 
+export const logout = () => (dispatch) => {
+   localStorage.clear();
+   dispatch(setCurrentUser({}));
+};
+
 export const authUser = (type, userData) => dispatch =>
    new Promise((resolve, reject) =>
       apiCall('post', `/api/auth/${type}`, userData)
