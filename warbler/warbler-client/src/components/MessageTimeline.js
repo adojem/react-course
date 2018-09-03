@@ -6,3 +6,5 @@ const MessageTimeLine = props => (
       <MessageList />
    </div>
 );
+
+export default MessageTimeLine;

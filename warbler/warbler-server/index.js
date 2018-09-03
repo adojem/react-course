@@ -8,6 +8,7 @@ const { loginRequired, ensureCorrectUser } = require('./middleware/auth');
 
 const app = express();
 
+const db =require('./models');
 const PORT = 8081;
 
 app.use(cors());
