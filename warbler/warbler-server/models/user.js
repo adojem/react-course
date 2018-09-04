@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
       required: true,
    },
    profileImageUrl: {
-      stype: String,
+      type: String,
    },
    messages: [
       {

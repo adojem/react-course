@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchMessages } from '../store/actions/messsages';
 import MessageItem from '../components/MessageItem';
@@ -11,7 +10,6 @@ class MessageList extends Component {
 
    render() {
       const { messages } = this.props;
-      console.log(messages);
       const messageList = messages.map(m => (
          <MessageItem
             key={m._id}
@@ -21,7 +19,15 @@ class MessageList extends Component {
             profileImageUrl={m.user.profileImageUrl}
          />
       ));
-      return messageList;
+      return (
+         <div className="row col-sm-8">
+            <div className="offset-1 col-sm-10">
+               <ul className="list-group" id="messages">
+                  {messageList}
+               </ul>
+            </div>
+         </div>
+      );
    }
 }
 

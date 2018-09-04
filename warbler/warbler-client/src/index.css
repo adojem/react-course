@@ -44,7 +44,7 @@ ul.nav.navbar-nav li {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url(./images/signed-out-home.jpg);
+  background-image: url("./images/signed-out-home.jpg");
   z-index: -1;
   text-align: center;
   padding: 1rem;
@@ -52,4 +52,14 @@ ul.nav.navbar-nav li {
   background-size: cover;
   color: #fff;
   text-shadow: 0 0 8px #66757f;
+}
+
+#messages .list-group-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 7px 20px 12px;
+}
+
+#messages:not(.no-hover) .list-group-item:hover {
+  background-color: #e6ec;
 }

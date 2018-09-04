@@ -9,28 +9,36 @@ export default class AuthForm extends Component {
          password: '',
          profileImageUrl: '',
       };
+
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
    }
 
-   handleChange = e => {
+   handleChange(e) {
       this.setState({
          [e.target.name]: e.target.value,
       });
-   };
+   }
 
-   handleSubmit = e => {
+   handleSubmit(e) {
       e.preventDefault();
-      const authType = this.props.signUp ? 'signup' : 'signin';
-      this.props
-         .onAuth(authType, this.state)
+      const { signUp, onAuth, history } = this.props;
+      const authType = signUp ? 'signup' : 'signin';
+
+      onAuth(authType, this.state)
          .then(() => {
-            this.props.history.push('/');
+            history.push('/');
          })
          .catch(() => false);
-   };
+   }
 
    render() {
-      const { email, username, password, profileImageUrl } = this.state;
-      const { heading, buttonText, signUp, errors, history, removeError } = this.props;
+      const {
+         email, username, password, profileImageUrl,
+      } = this.state;
+      const {
+         heading, buttonText, signUp, errors, history, removeError,
+      } = this.props;
 
       history.listen(() => removeError());
 
@@ -43,6 +51,7 @@ export default class AuthForm extends Component {
                   {errors.message && <div className="alert alert-danger">{errors.message}</div>}
                   <label htmlFor="email">Email:</label>
                   <input
+                     autoComplete="off"
                      type="text"
                      name="email"
                      id="email"
@@ -50,18 +59,21 @@ export default class AuthForm extends Component {
                      onChange={this.handleChange}
                      value={email}
                   />
-                  <label htmlFor="email">Password:</label>
+                  <label htmlFor="password">Password:</label>
                   <input
+                     autoComplete="off"
                      type="password"
                      name="password"
                      id="password"
                      className="form-control"
                      onChange={this.handleChange}
+                     value={password}
                   />
                   {signUp && (
                      <div>
                         <label htmlFor="username">User Name:</label>
                         <input
+                           autoComplete="off"
                            type="text"
                            name="username"
                            id="username"
@@ -72,7 +84,7 @@ export default class AuthForm extends Component {
                         <label htmlFor="image-url">Image URL:</label>
                         <input
                            type="text"
-                           name="prifleImageUrl"
+                           name="profileImageUrl"
                            id="image-url"
                            className="form-control"
                            value={profileImageUrl}

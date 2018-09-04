@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MessageTimeLine from './MessageTimeline';
 
@@ -14,11 +15,22 @@ const Homepage = ({ currentUser }) => {
          </div>
       );
    }
+   const { profileImageUrl, username } = currentUser.user;
    return (
       <div>
-         <MessageTimeLine />
+         <MessageTimeLine profileImageUrl={profileImageUrl} username={username} />
       </div>
    );
+};
+
+Homepage.propTypes = {
+   currentUser: PropTypes.shape({
+      isAuthenticated: PropTypes.bool.isRequired,
+      user: PropTypes.shape({
+         username: PropTypes.string.isRequired,
+         profileImageUrl: PropTypes.string,
+      }).isRequired,
+   }).isRequired,
 };
 
 export default Homepage;

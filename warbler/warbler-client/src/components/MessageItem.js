@@ -7,22 +7,24 @@ const MessageItem = ({
    date, profileImageUrl, text, username,
 }) => (
    <div>
-      <img
-         src={profileImageUrl || DefaultProfileImg}
-         alt={username}
-         heighht="100"
-         width="100"
-         className="timeline-image"
-      />
-      <div className="message-area">
-         <Link to="/">@{username}</Link>
-         <span className="text-muted">
-            <Moment className="text-muted" format="Do MM YYYY">
-               {date}
-            </Moment>
-         </span>
-         <p>{text}</p>
-      </div>
+      <li className="list-group-item">
+         <img
+            src={profileImageUrl || DefaultProfileImg}
+            alt={username}
+            heighht="100"
+            width="100"
+            className="timeline-image"
+         />
+         <div className="message-area">
+            <Link to="/">@{username}</Link>
+            <span className="text-muted">
+               <Moment className="text-muted" format="Do MM YYYY">
+                  {date}
+               </Moment>
+            </span>
+            <p>{text}</p>
+         </div>
+      </li>
    </div>
 );
 
