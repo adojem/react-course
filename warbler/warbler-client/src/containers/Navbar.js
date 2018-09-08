@@ -19,7 +19,7 @@ const Navbar = (props) => {
                </Link>
             </div>
             {props.currentUser.isAuthenticated ? (
-               <ul className="nav-navbar-nav navbar-right">
+               <ul className="nav navbar-nav navbar-right">
                   <li>
                      <Link to={`/users/${props.currentUser.user.id}/messages/new`}>
                         New Message
