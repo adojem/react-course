@@ -13,7 +13,7 @@ class MessageForm extends Component {
    }
 
    handleNewMessage(event) {
-      const { postNewMessage, history, message } = this.state;
+      const { postNewMessage, history, message } = this.props;
       event.preventDefault();
       postNewMessage(message);
       this.setState({ message: '' });
