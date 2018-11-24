@@ -14,7 +14,7 @@ function rootReducer(state = initialState, action) {
          };
 
       case 'REMOVE_TODO':
-         let todos = state.todos.filter((val) => val.id !== +action.id);
+         let todos = state.todos.filter(val => val.id !== +action.id);
          //    debugger;
          return { ...state, todos };
       default:

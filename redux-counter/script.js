@@ -4,17 +4,18 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
    switch (action.type) {
-      case 'INCREMENT':
-         var newState = { ...state };
-         // let newState = Object.assign({}, state);
-         newState.count++;
-         return newState;
-      
-      case 'DECREMENT':
-         var newState = { ...state };
-         newState.count--;
-         return newState;
-      
+      case 'INCREMENT': {
+         const newSate = Object.assign({}, state);
+         newSate.count++;
+         return newSate;
+      }
+
+      case 'DECREMENT': {
+         const newSate = { ...state };
+         newSate.count--;
+         return newSate;
+      }
+
       default:
          return state;
    }
@@ -22,18 +23,22 @@ function rootReducer(state = initialState, action) {
 
 const store = Redux.createStore(rootReducer);
 
-$(document).ready(function () {
+function setState(type) {
+   if (type) {
+      store.dispatch({ type });
+   }
    let currentState = store.getState();
    $('#counter').text(currentState.count);
+}
 
-   $('#increment').on('click', function () {
-      store.dispatch({ type: 'INCREMENT' });
-      let currentState = store.getState();
-      $('#counter').text(currentState.count);
+$(document).ready(function() {
+   setState();
+
+   $('#increment').on('click', function() {
+      setState('INCREMENT');
    });
-   $('#decrement').on('click', function () {
-      store.dispatch({ type: 'DECREMENT' });
-      let currentState = store.getState();
-      $('#counter').text(currentState.count);
+
+   $('#decrement').on('click', function() {
+      setState('DECREMENT');
    });
 });
