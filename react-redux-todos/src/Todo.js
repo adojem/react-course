@@ -1,10 +1,7 @@
 import React from 'react';
 
-const Todo = ({ task, removeTodo }) => (
-   <li>
-      {task}
-      <button onClick={removeTodo}>X</button>
-   </li>
-);
+const Todo = ({ task }) => {
+   return <li>{task}</li>;
+};
 
 export default Todo;
