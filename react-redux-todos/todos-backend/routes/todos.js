@@ -1,10 +1,11 @@
 const express = require('express');
-const router = express.Router();
 const Todo = require('../models/todo');
+
+const router = express.Router();
 
 router.get('/', (req, res, next) => {
    Todo.find({})
-      .then(todo => res.send(todo))
+      .then(todos => res.send(todos))
       .catch(err => next(err));
 });
 
@@ -15,7 +16,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.delete('/:id', (req, res, next) => {
-   Todo.findByIdAndRemove(req.params.id)
+   Todo.findOneAndDelete(req.params.id)
       .then(todo => res.send(todo))
       .catch(err => next(err));
 });
