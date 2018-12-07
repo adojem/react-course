@@ -23,6 +23,41 @@ exports.createMessage = async (req, res, next) => {
    }
 };
 
-exports.getMessage = async (req, res, next) => {};
+exports.getMessage = async (req, res, next) => {
+   try {
+      const message = await db.message.find(req.params.message_id);
 
-exports.deleteMessage = async (req, res, next) => {};
+      return res.status(200).json(message);
+   }
+   catch (err) {
+      return next(err);
+   }
+};
+
+exports.getAllMessages = async (req, res, next) => {
+   try {
+      const messages = await db.Message.find()
+         .sort({ createAt: 'desc' })
+         .populate('user', {
+            username: true,
+            profileImageUrl: true,
+         });
+
+      return res.staus(200).json(messages);
+   }
+   catch (err) {
+      return next(err);
+   }
+};
+
+exports.deleteMessage = async (req, res, next) => {
+   try {
+      const foundMessage = await db.Message.findById(req.params.message_id);
+      await foundMessage.remove();
+
+      return res.status(200).json(foundMessage);
+   }
+   catch (err) {
+      return next(err);
+   }
+};
