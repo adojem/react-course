@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from '../store';
+import Main from './Main';
 import Navbar from './Navbar';
 
 const store = configureStore();
@@ -11,7 +12,7 @@ const App = () => (
       <Router>
          <div className="onboarding">
             <Navbar />
-            <div>Hello World</div>
+            <Main />
          </div>
       </Router>
    </Provider>

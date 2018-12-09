@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import {
    Switch, Route, withRouter, Redirect,
 } from 'react-router-dom';
+import Homepage from '../components/Homepage';
 
 const Main = () => (
-   <div>
+   <div className="container">
       <Switch>
          <Route exact path="/" render={props => <Homepage />} />
       </Switch>

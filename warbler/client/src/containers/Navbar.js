@@ -11,7 +11,7 @@ class Navbar extends Component {
       return (
          <nav className="navbar navbar-expand">
             <div className="container-fluid">
-               <div navbar-header>
+               <div className="navbar-header">
                   <Link to="/" className="navbar-brand">
                      <img src={Logo} alt="Warbler Home" />
                   </Link>
