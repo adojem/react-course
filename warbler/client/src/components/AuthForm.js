@@ -22,8 +22,8 @@ class AuthForm extends Component {
    handleSubmit = (e) => {
       e.preventDefault();
 
-      const { signup, onAuth } = this.props;
-      const authType = signup ? 'signup' : 'signin';
+      const { signUp, onAuth } = this.props;
+      const authType = signUp ? 'signup' : 'signin';
 
       onAuth(authType, this.state).then(() => {
          console.log('Logged in successfully');
@@ -31,22 +31,29 @@ class AuthForm extends Component {
    };
 
    render() {
+      console.log(this.props);
+
       const {
          email, username, password, profileImageUrl,
       } = this.state;
-      const { heading, buttonText, signUp } = this.props;
+      const {
+         errors, heading, history, buttonText, removeError, signUp,
+      } = this.props;
+
+      history.listen(() => removeError());
 
       return (
          <div className="row justify-content-md-center text-center">
             <div className="col-md-6">
                <form onSubmit={this.handleSubmit}>
                   <h2>{heading}</h2>
+                  {errors.message && <div className="alert alert-danger">{errors.message}</div>}
                   <div className="form-group">
                      <label className="d-block" htmlFor="email">
                         Email:
                         <input
                            id="email"
-                           className="form-control"
+                           className="form-control mt-2"
                            type="text"
                            name="email"
                            value={email}
@@ -59,7 +66,7 @@ class AuthForm extends Component {
                         Password:
                         <input
                            id="password"
-                           className="form-control"
+                           className="form-control mt-2"
                            type="text"
                            name="password"
                            value={password}
@@ -74,7 +81,7 @@ class AuthForm extends Component {
                               Username:
                               <input
                                  id="username"
-                                 className="form-control"
+                                 className="form-control mt-2"
                                  type="text"
                                  name="username"
                                  value={username}
@@ -87,7 +94,7 @@ class AuthForm extends Component {
                               Image URL:
                               <input
                                  id="image-url"
-                                 className="form-control"
+                                 className="form-control mt-2"
                                  type="text"
                                  name="profileImageUrl"
                                  value={profileImageUrl}
@@ -114,8 +121,15 @@ AuthForm.defaultProps = {
 AuthForm.propTypes = {
    signUp: PropTypes.bool,
    onAuth: PropTypes.func.isRequired,
+   removeError: PropTypes.func.isRequired,
    heading: PropTypes.string.isRequired,
    buttonText: PropTypes.string.isRequired,
+   errors: PropTypes.shape({
+      message: PropTypes.string,
+   }).isRequired,
+   history: PropTypes.shape({
+      listen: PropTypes.func.isRequired,
+   }).isRequired,
 };
 
 export default AuthForm;

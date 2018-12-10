@@ -7,8 +7,9 @@ import {
 import Homepage from '../components/Homepage';
 import AuthForm from '../components/AuthForm';
 import { authUser } from '../store/actions/auth';
+import { removeError } from '../store/actions/error';
 
-const Main = ({ authUser }) => (
+const Main = ({ authUser, errors, removeError }) => (
    <div className="container">
       <Switch>
          <Route exact path="/" render={props => <AuthForm />} />
@@ -17,7 +18,14 @@ const Main = ({ authUser }) => (
             exact
             path="/signin"
             render={props => (
-               <AuthForm onAuth={authUser} buttonText="Log in" heading="Welcome Back." {...props} />
+               <AuthForm
+                  errors={errors}
+                  onAuth={authUser}
+                  removeError={removeError}
+                  buttonText="Log in"
+                  heading="Welcome Back."
+                  {...props}
+               />
             )}
          />
          <Route
@@ -25,7 +33,9 @@ const Main = ({ authUser }) => (
             path="/signup"
             render={props => (
                <AuthForm
+                  errors={errors}
                   onAuth={authUser}
+                  removeError={removeError}
                   signUp
                   buttonText="Sign me up!"
                   heading="Join Warbler today."
@@ -37,13 +47,21 @@ const Main = ({ authUser }) => (
    </div>
 );
 
+Main.propTypes = {
+   authUser: PropTypes.func.isRequired,
+   errors: PropTypes.shape({
+      message: PropTypes.string,
+   }).isRequired,
+};
+
 const mapStateToProps = state => ({
    currentUser: state.currentUser,
+   errors: state.errors,
 });
 
 export default withRouter(
    connect(
       mapStateToProps,
-      { authUser },
+      { authUser, removeError },
    )(Main),
 );

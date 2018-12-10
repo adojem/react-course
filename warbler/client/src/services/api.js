@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+/**
+ * A wrapper around axios API call that formats errors, etc
+ * @param {string} method the Http verb you want to use
+ * @param {string} path the route path / endpoint
+ * @param {object} data (optional) data in JSON from for POST requests
+ */
 export default function apiCall(method, path, data) {
    return new Promise((resolve, reject) =>
       axios[method](path, data)
