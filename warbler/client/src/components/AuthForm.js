@@ -19,7 +19,16 @@ class AuthForm extends Component {
       });
    };
 
-   handleSubmit() {}
+   handleSubmit = (e) => {
+      e.preventDefault();
+
+      const { signup, onAuth } = this.props;
+      const authType = signup ? 'signup' : 'signin';
+
+      onAuth(authType, this.state).then(() => {
+         console.log('Logged in successfully');
+      });
+   };
 
    render() {
       const {
@@ -31,7 +40,7 @@ class AuthForm extends Component {
          <div className="row justify-content-md-center text-center">
             <div className="col-md-6">
                <form onSubmit={this.handleSubmit}>
-                  <h2>AuthForm</h2>
+                  <h2>{heading}</h2>
                   <div className="form-group">
                      <label className="d-block" htmlFor="email">
                         Email:
@@ -88,11 +97,25 @@ class AuthForm extends Component {
                         </div>
                      </Fragment>
                   )}
+                  <button type="submit" className="btn btn-primary btn-block btn-lg">
+                     {buttonText}
+                  </button>
                </form>
             </div>
          </div>
       );
    }
 }
+
+AuthForm.defaultProps = {
+   signUp: false,
+};
+
+AuthForm.propTypes = {
+   signUp: PropTypes.bool,
+   onAuth: PropTypes.func.isRequired,
+   heading: PropTypes.string.isRequired,
+   buttonText: PropTypes.string.isRequired,
+};
 
 export default AuthForm;
