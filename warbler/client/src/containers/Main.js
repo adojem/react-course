@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -9,11 +9,16 @@ import AuthForm from '../components/AuthForm';
 import { authUser } from '../store/actions/auth';
 import { removeError } from '../store/actions/error';
 
-const Main = ({ authUser, errors, removeError }) => (
+const Main = ({
+   authUser, currentUser, errors, removeError,
+}) => (
    <div className="container">
       <Switch>
-         <Route exact path="/" render={props => <AuthForm />} />
-         <Route exact path="/" render={props => <Homepage />} />
+         <Route
+            exact
+            path="/"
+            render={props => <Homepage currentUser={currentUser} {...props} />}
+         />
          <Route
             exact
             path="/signin"

@@ -22,17 +22,17 @@ class AuthForm extends Component {
    handleSubmit = (e) => {
       e.preventDefault();
 
-      const { signUp, onAuth } = this.props;
+      const { history, signUp, onAuth } = this.props;
       const authType = signUp ? 'signup' : 'signin';
 
-      onAuth(authType, this.state).then(() => {
-         console.log('Logged in successfully');
-      });
+      onAuth(authType, this.state)
+         .then(() => {
+            history.push('/');
+         })
+         .catch((err) => {});
    };
 
    render() {
-      console.log(this.props);
-
       const {
          email, username, password, profileImageUrl,
       } = this.state;
@@ -40,7 +40,12 @@ class AuthForm extends Component {
          errors, heading, history, buttonText, removeError, signUp,
       } = this.props;
 
-      history.listen(() => removeError());
+      if (errors.message) {
+         const unlisten = history.listen(() => {
+            removeError();
+            unlisten();
+         });
+      }
 
       return (
          <div className="row justify-content-md-center text-center">
