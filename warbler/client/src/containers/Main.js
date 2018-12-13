@@ -8,6 +8,7 @@ import Homepage from '../components/Homepage';
 import AuthForm from '../components/AuthForm';
 import { authUser } from '../store/actions/auth';
 import { removeError } from '../store/actions/error';
+import withAuth from '../hocs/withAuth';
 
 const Main = ({
    authUser, currentUser, errors, removeError,
@@ -48,6 +49,7 @@ const Main = ({
                />
             )}
          />
+         <Route path="/users/:id/messages/new" />
       </Switch>
    </div>
 );
