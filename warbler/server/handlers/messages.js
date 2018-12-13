@@ -43,7 +43,7 @@ exports.getAllMessages = async (req, res, next) => {
             profileImageUrl: true,
          });
 
-      return res.staus(200).json(messages);
+      return res.status(200).json(messages);
    }
    catch (err) {
       return next(err);
