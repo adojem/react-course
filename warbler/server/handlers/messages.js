@@ -37,7 +37,7 @@ exports.getMessage = async (req, res, next) => {
 exports.getAllMessages = async (req, res, next) => {
    try {
       const messages = await db.Message.find()
-         .sort({ createAt: 'desc' })
+         .sort({ createdAt: 'desc' })
          .populate('user', {
             username: true,
             profileImageUrl: true,
