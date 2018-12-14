@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchMessages } from '../store/actions/messages';
+import { fetchMessages, removeMessage } from '../store/actions/messages';
 import MessageItem from '../components/MessageItem';
 
 class MessageList extends Component {
@@ -10,14 +10,17 @@ class MessageList extends Component {
    }
 
    render() {
-      const { messages } = this.props;
+      const { messages, removeMessage, currentUser } = this.props;
+
       const messageList = messages.map(m => (
          <MessageItem
             key={m._id}
-            date={m.createAt}
+            date={m.createdAt}
             text={m.text}
             username={m.user.username}
             profileImageUrl={m.user.profileImageUrl}
+            removeMessage={() => removeMessage(m.user._id, m._id)}
+            isCorrectUser={currentUser === m.user._id}
          />
       ));
 
@@ -35,6 +38,8 @@ class MessageList extends Component {
 
 MessageList.propTypes = {
    fetchMessages: PropTypes.func.isRequired,
+   removeMessage: PropTypes.func.isRequired,
+   currentUser: PropTypes.string.isRequired,
    messages: PropTypes.arrayOf(
       PropTypes.shape({
          _id: PropTypes.strin,
@@ -50,9 +55,10 @@ MessageList.propTypes = {
 
 const mapStateToProps = state => ({
    messages: state.messages,
+   currentUser: state.currentUser.user.id,
 });
 
 export default connect(
    mapStateToProps,
-   { fetchMessages },
+   { fetchMessages, removeMessage },
 )(MessageList);
